@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="./form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Survey Form</h1>
+      <form id="surveyForm">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="profession">Profession:</label>
+          <input type="text" id="profession" name="profession" required />
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" id="mobile" name="mobile" required />
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <div class="form-group">
+          <label for="country">Country:</label>
+          <select id="country" name="country" required>
+            <option value="">Select</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Gender:</label>
+          <input type="radio" id="male" name="gender" value="Male" required />
+          Male
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="Female"
+            required
+          />
+          Female
+        </div>
+
+        <div class="button-container">
+          <input type="button" value="Submit" onclick="submitForm()" />
+          <input type="button" value="Reset" onclick="resetForm()" />
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function submitForm() {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const dob = document.getElementById("dob").value;
+        const country = document.getElementById("country").value;
+        const genderElements = document.getElementsByName("gender");
+        const selectedGender = Array.from(genderElements)
+          .filter((element) => element.checked)
+          .map((element) => element.value);
+        const profession = document.getElementById("profession").value;
+        const email = document.getElementById("email").value;
+        const mobile = document.getElementById("mobile").value;
+
+        if (
+          firstName &&
+          lastName &&
+          dob &&
+          country &&
+          selectedGender.length > 0 &&
+          profession &&
+          email &&
+          mobile
+        ) {
+          const confirmationMessage = `First Name: ${firstName}\nLast Name: ${lastName}\nDate of Birth: ${dob}\nCountry: ${country}\nGender: ${selectedGender.join(
+            ", "
+          )}\nProfession: ${profession}\nEmail: ${email}\nMobile: ${mobile}`;
+          alert(confirmationMessage);
+          document.getElementById("surveyForm").reset();
+        } else {
+          alert("Please fill in all required fields.");
+        }
+      }
+
+      function resetForm() {
+        document.getElementById("surveyForm").reset();
+      }
+    </script>
+  </body>
+</html>
